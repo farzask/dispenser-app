@@ -68,10 +68,6 @@ class Managefingerprints extends StatelessWidget {
                   ),
 
                   SizedBox(height: 20),
-
-                  CustomButton(text: "Remove fingerprint", onPressed: () {}),
-
-                  SizedBox(height: 20),
                 ],
               ),
             ),

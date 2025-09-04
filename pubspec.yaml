@@ -40,8 +40,6 @@ dependencies:
   firebase_core: ^4.0.0
   cloud_firestore: ^6.0.0
   flutter_bluetooth_serial: ^0.4.0
-  lottie: ^3.3.1
-  video_player: ^2.10.0
 
 
 dev_dependencies:
@@ -70,8 +68,6 @@ flutter:
   assets:
     - asset\icons\nicLogo.png
     - asset\icons\females.png
-    - asset\icons\fingerprint scanning.json
-    - asset\icons\fingerprint_demo.mp4
     - asset\icons\fingerprint_demo.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
