@@ -58,8 +58,8 @@ class _LoginState extends State<Login> {
           isAdmin = userData['isAdmin'] ?? false;
           userName =
               userData['name'] ?? employeeId; // Use name field if available
-          fingerprintId =
-              userData['fingerprintId'] ?? ''; // Fetch fingerprintId as string
+          fingerprintId = userData['fingerprintId']
+              .toString(); // Fetch fingerprintId as string
           break;
         }
       }
@@ -101,6 +101,7 @@ class _LoginState extends State<Login> {
       }
     } catch (e) {
       // Handle any errors
+      print(e);
       _showErrorDialog(
         'Login Error',
         'An error occurred during login. Please try again.',

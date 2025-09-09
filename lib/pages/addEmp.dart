@@ -21,7 +21,7 @@ class _AddEmployeeState extends State<AddEmployee> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   bool _isAdmin = false; // Default to false (No)
-  int _fingerprintId = 0; // Variable to store the fingerprint ID
+  String _fingerprintId = ''; // Variable to store the fingerprint ID
   bool _isLoadingFingerprintId = true; // Loading state for fingerprint ID
 
   // List of error codes to avoid
@@ -53,7 +53,7 @@ class _AddEmployeeState extends State<AddEmployee> {
         }
 
         setState(() {
-          _fingerprintId = nextFingerprintId;
+          _fingerprintId = nextFingerprintId as String;
           _isLoadingFingerprintId = false;
         });
       } else {
@@ -64,7 +64,7 @@ class _AddEmployeeState extends State<AddEmployee> {
         }
 
         setState(() {
-          _fingerprintId = nextFingerprintId;
+          _fingerprintId = nextFingerprintId as String;
           _isLoadingFingerprintId = false;
         });
       }
@@ -77,7 +77,7 @@ class _AddEmployeeState extends State<AddEmployee> {
       }
 
       setState(() {
-        _fingerprintId = nextFingerprintId;
+        _fingerprintId = nextFingerprintId as String;
         _isLoadingFingerprintId = false;
       });
     }
