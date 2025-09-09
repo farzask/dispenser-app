@@ -1,3 +1,4 @@
+import 'package:dispenser/pages/homepage.dart';
 import 'package:dispenser/pages/timeout.dart';
 import 'package:flutter/material.dart';
 import 'package:dispenser/widgets/buttons.dart';
@@ -9,13 +10,8 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ScanningFingerprint extends StatefulWidget {
-  final String employeeId;
-
-  const ScanningFingerprint(
-    BuildContext context, {
-    super.key,
-    required this.employeeId,
-  });
+  final String fingerprintId;
+  const ScanningFingerprint({super.key, required this.fingerprintId});
 
   @override
   State<StatefulWidget> createState() => _ScanningFingerprint();
@@ -39,7 +35,7 @@ class _ScanningFingerprint extends State<ScanningFingerprint> {
     super.initState();
     _initializeBluetoothConnection();
 
-    print('📱 APP: Employee ID received: ${widget.employeeId}');
+    print('📱 APP: Fingerprint ID received: ${widget.fingerprintId}');
   }
 
   @override
@@ -175,6 +171,7 @@ class _ScanningFingerprint extends State<ScanningFingerprint> {
       case 'Completed':
         print('📱 APP TERMINAL: Fingerprint enrollment completed');
         setState(() {
+          _timer?.cancel();
           isScanning = false;
           firstScanComplete = false; // Reset for next time
           scanningCompleted = true;
@@ -285,14 +282,18 @@ class _ScanningFingerprint extends State<ScanningFingerprint> {
       isScanning = true;
       _timer = Timer(const Duration(seconds: 30), () {
         // Navigate after 30 seconds
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const Timeout()),
-        );
+        if (!firstScanComplete) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const Timeout()),
+          );
+        }
       });
     });
-    _sendBluetoothMessage('StartScan');
-    print('📱 APP: Starting fingerprint scanning...');
+    _sendBluetoothMessage('StartScan_${widget.fingerprintId}_');
+    print(
+      '📱 APP: Starting fingerprint scanning... with ID = _${widget.fingerprintId}_',
+    );
   }
 
   @override
@@ -558,11 +559,14 @@ class _ScanningFingerprint extends State<ScanningFingerprint> {
           onPressed: isDisconnecting
               ? null
               : () {
-                  // Return result indicating scanning was completed
-                  Navigator.pop(context, {
-                    'scanning_completed': true,
-                    'disconnected': true,
-                  });
+                  // Navigate back to homepage using pushReplacement
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          MyHomePage(fingerprintId: widget.fingerprintId),
+                    ),
+                  );
                 },
         ),
       ],

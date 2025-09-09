@@ -4,8 +4,8 @@ import 'package:dispenser/widgets/buttons.dart';
 import 'package:dispenser/widgets/text.dart';
 
 class Managefingerprints extends StatelessWidget {
-  final String employeeId;
-  const Managefingerprints({super.key, required this.employeeId});
+  final String fingerprintId;
+  const Managefingerprints({super.key, required this.fingerprintId});
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +43,8 @@ class Managefingerprints extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ScanningFingerprint(
-                            context,
-                            employeeId: employeeId,
-                          ),
+                          builder: (context) =>
+                              ScanningFingerprint(fingerprintId: fingerprintId),
                         ),
                       );
                     },
@@ -61,7 +59,7 @@ class Managefingerprints extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              ScanningFingerprint(context, employeeId: ''),
+                              ScanningFingerprint(fingerprintId: fingerprintId),
                         ),
                       );
                     },

@@ -45,6 +45,7 @@ class _LoginState extends State<Login> {
       bool userFound = false;
       bool isAdmin = false;
       String userName = employeeId;
+      String fingerprintId = ''; // Add fingerprintId variable
 
       // Search through all documents for matching credentials
       for (QueryDocumentSnapshot doc in cecosQuery.docs) {
@@ -57,17 +58,23 @@ class _LoginState extends State<Login> {
           isAdmin = userData['isAdmin'] ?? false;
           userName =
               userData['name'] ?? employeeId; // Use name field if available
+          fingerprintId =
+              userData['fingerprintId'] ?? ''; // Fetch fingerprintId as string
           break;
         }
       }
 
       if (userFound) {
-        // Save login state
+        // Save login state including fingerprintId
         final prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isLoggedIn', true);
         await prefs.setString('employeeId', employeeId);
         await prefs.setString('userName', userName);
         await prefs.setBool('isAdmin', isAdmin);
+        await prefs.setString(
+          'fingerprintId',
+          fingerprintId,
+        ); // Save fingerprintId
 
         // Navigate based on role
         if (isAdmin) {
@@ -79,7 +86,9 @@ class _LoginState extends State<Login> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => MyHomePage(employeeId: employeeId),
+              builder: (context) => MyHomePage(
+                fingerprintId: fingerprintId,
+              ), // Pass fingerprintId
             ),
           );
         }
