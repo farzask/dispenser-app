@@ -467,33 +467,33 @@ class _DeleteEmployeeState extends State<DeleteEmployee> {
   String? _foundEmployeeDocId;
   bool _employeeFound = false;
 
-  Future<void> _updateAdminCounter() async {
-    try {
-      // Fetch the admin document
-      DocumentSnapshot admin = await FirebaseFirestore.instance
-          .collection('cecos')
-          .doc('admin') // Replace with your actual admin document ID
-          .get();
+  // Future<void> _updateAdminCounter() async {
+  //   try {
+  //     // Fetch the admin document
+  //     DocumentSnapshot admin = await FirebaseFirestore.instance
+  //         .collection('cecos')
+  //         .doc('admin') // Replace with your actual admin document ID
+  //         .get();
 
-      if (admin.exists) {
-        Map<String, dynamic> data = admin.data() as Map<String, dynamic>;
-        int counter = data['counter'] ?? 0;
-        int fingerprintID = counter - 1;
+  //     if (admin.exists) {
+  //       Map<String, dynamic> data = admin.data() as Map<String, dynamic>;
+  //       int counter = data['counter'] ?? 0;
+  //       int fingerprintID = counter - 1;
 
-        try {
-          await FirebaseFirestore.instance
-              .collection('cecos')
-              .doc('admin')
-              .update({'counter': fingerprintID});
-        } catch (e) {
-          print('Error updating counter: $e');
-          // Handle error as needed
-        }
-      }
-    } catch (e) {
-      print('Error fetching counter: $e');
-    }
-  }
+  //       try {
+  //         await FirebaseFirestore.instance
+  //             .collection('cecos')
+  //             .doc('admin')
+  //             .update({'counter': fingerprintID});
+  //       } catch (e) {
+  //         print('Error updating counter: $e');
+  //         // Handle error as needed
+  //       }
+  //     }
+  //   } catch (e) {
+  //     print('Error fetching counter: $e');
+  //   }
+  // }
 
   // Function to search for employee by ID
   Future<void> _searchEmployee() async {
@@ -584,7 +584,7 @@ class _DeleteEmployeeState extends State<DeleteEmployee> {
           .collection('cecos')
           .doc(_foundEmployeeDocId)
           .delete();
-      _updateAdminCounter();
+      // _updateAdminCounter();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Employee deleted successfully!"),
