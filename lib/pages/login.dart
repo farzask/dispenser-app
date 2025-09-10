@@ -193,8 +193,8 @@ class _LoginState extends State<Login> {
                       const Spacer(flex: 1),
 
                       // Image with responsive sizing
-                      Image.asset(
-                        "asset/icons/females.png",
+                      Image.network(
+                        "https://res.cloudinary.com/dnvnbroue/image/upload/v1757499938/females_tyko1l.png",
                         width: imageWidth,
                         fit: BoxFit.contain,
                         errorBuilder: (context, error, stackTrace) {

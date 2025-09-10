@@ -376,8 +376,8 @@ class _ScanningFingerprint extends State<ScanningFingerprint> {
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              "asset/icons/fingerprint_demo.gif",
+            child: Image.network(
+              "https://res.cloudinary.com/dnvnbroue/image/upload/v1757499939/fingerprint_demo_b3boss.gif",
               fit: BoxFit.contain,
             ),
           ),

@@ -362,7 +362,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       Padding(
                         padding: EdgeInsets.all(20),
-                        child: Image.asset("asset/icons/nicLogo.png"),
+                        child: Image.network(
+                          "https://res.cloudinary.com/dnvnbroue/image/upload/v1757499938/nicLogo_ui3gdd.png",
+                        ),
                       ),
 
                       // Real-time Connection Status Card
