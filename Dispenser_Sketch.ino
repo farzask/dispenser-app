@@ -21,7 +21,7 @@
 
 #define FINGERPRINT_RX_PIN 16
 #define FINGERPRINT_TX_PIN 17
-#define LED_PIN 2           // onboard LED (Locker relay simulation)
+#define LOCKER_RELAY_PIN 27           // (Locker relay simulation)
 #define MOTOR_RELAY_PIN 12           // rELAY PIN FOR STEPPER MOTOR
 // Stepper motor config
 const int stepsPerRevolution = 2048;  // 28BYJ-48 with gearbox
@@ -132,9 +132,9 @@ void runDispenser() {
 
 void triggerLockerRelay() {
   Serial.println(">>> Triggering Locker Relay (LED blink 2s)");
-  digitalWrite(LED_PIN, LOW);
+  digitalWrite(LOCKER_RELAY_PIN, LOW);
   delay(3000);
-  digitalWrite(LED_PIN, HIGH);
+  digitalWrite(LOCKER_RELAY_PIN, HIGH);
 }
 
 // -------- BLE Server Callbacks --------
@@ -329,7 +329,7 @@ void fingerprintCheckLoop() {
     Serial.print("  confidence=");
     Serial.println(finger.confidence);
 
-    if(finger.fingerID == 1 || finger.fingerID == 2 || finger.fingerID == 3 || finger.fingerID == 4 || finger.fingerID == 5){
+    if(finger.fingerID == 1 || finger.fingerID == 2 || finger.fingerID == 3 || finger.fingerID == 4 || finger.fingerID == 5 || finger.fingerID == 6 || finger.fingerID == 7 || finger.fingerID == 8 || finger.fingerID == 9|| finger.fingerID == 10){
       Serial.println("Trigger Locker Relay");
       triggerLockerRelay();
     }
@@ -346,9 +346,9 @@ void fingerprintCheckLoop() {
 
 // -------- SETUP --------
 void setup() {
-  pinMode(LED_PIN, OUTPUT);
+  pinMode(LOCKER_RELAY_PIN, OUTPUT);
   pinMode(MOTOR_RELAY_PIN, OUTPUT);
-  digitalWrite(LED_PIN, HIGH);
+  digitalWrite(LOCKER_RELAY_PIN, HIGH);
   digitalWrite(MOTOR_RELAY_PIN, HIGH);
 
   // Stepper pins

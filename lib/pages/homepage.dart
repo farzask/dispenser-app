@@ -292,6 +292,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // Navigate to manage fingerprints
   Future<void> navigateToManageFingerprints() async {
     if (isConnected) {
+      // ignore: unused_local_variable
       final result = await Navigator.push(
         context,
         MaterialPageRoute(
